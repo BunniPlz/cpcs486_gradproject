@@ -14,7 +14,7 @@ SHELL = /bin/sh
 SYSTEM ?= $(shell config/config.guess | cut -d - -f 3 | sed -e 's/[0-9\.]//g;')
 SYSTEM.SUPPORTED = $(shell test -f config/Makefile.$(SYSTEM) && echo 1)
 
-CFLAGS += -DNOTEXTURE
+#CFLAGS += -DNOTEXTURE
 
 ifeq ($(SYSTEM.SUPPORTED), 1)
 include config/Makefile.$(SYSTEM)
@@ -23,12 +23,12 @@ $(error "Platform '$(SYSTEM)' not supported")
 endif
 
 
-TARGET = hello_glsl
+TARGET = hello_collision
 # C++ Files
-CXXFILES =   hello_glsl.cpp glut_teapot.cpp
+CXXFILES =   glut_teapot.cpp hello_collision.cpp utilities.cpp
 CFILES =  
 # Headers
-HEADERS =  GLFWApp.h GLSLShader.h glut_teapot.h
+HEADERS =  Camera.h GLFWApp.h GLSLShader.h GLTexture.h glut_teapot.h Material.h SpinningLight.h Square.h Teapot.h UtahTeapot.h utilities.h
 
 OBJECTS = $(CXXFILES:.cpp=.o) $(CFILES:.c=.o)
 

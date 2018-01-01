@@ -1,11 +1,10 @@
-Mandy Chiu cccpsoda@gmail.com
-I changed the colors of light0 and light1 to white.
-In the fragment shader bronze.frag.glsl, I obtain the reflection vector of the 2 lights using the direction vectors and the normal vector and the reflect() function.
-I set the values of W and P vectors to 1,1,1,1 and 1,2,20,1 respectively.
-I wrote the function ComputeColor() which takes the
-	- eyeDirection, the direction of the viewing vector
-	- W, which I think is the base color of the fragment
-	- P, which I think is a filter meant to dampen each value of W individually
-	- reflection vector
-For each light 0 and 1, I ComputeColor().
-I get the final fragment color by adding the results of each computed value together.
+Mandy Chiu
+cccpsoda@gmail.com
+
+I started from the teapot vision project. I wrote a Square.h class to keep track of each square's position and movement direction. I wrote isColliding to check the current square against another square for collision using the separating axis theorem. To do this, I projected the vertices of each square onto each of the square's unique edge normals and calculated the magnitudes of each projected vertex as a vector from the origin.  I found the minimum and maximum of the current square and the other square being checked for collision, and compared to see if there was a gap along the axis. I repeat for each axis, and if none of them had a separating gap, then the collision detection returns true.
+
+In the main context, I set up a bounding box using 4 scaled squares with 0 velocity and 10 bouncing squares with randomized positions and velocities. In the render loop, I checked each bouncing square for collision with the walls and reflect the velocity off the normal of the wall when it collides.  When checking against each of the other squares, I check the rough direction of impact (left, right, above, below) and reflect the velocities of the two squares accordingly.
+
+I attempted to assign a unique texture to each of the bouncing square however I was unable to work out the errors, so I only have a white square texture for the walls and the same garbled happyface texture for the bouncing squares (also unable to make it scale correctly).
+
+Things that I could improve on would be to correct the texture bugs, but also to implement a more coarse detection method before checking the expensive collision detection. One method I considered was the QuadTree which is to separate the entire space into quadrants and checking if a box is inside the same quadrant as another before even trying to calculate projections and magnitudes. Another thing to improve is to make the bouncing behave more realistically and to correct the bug of some squares appearing to pass right through each other at times.
